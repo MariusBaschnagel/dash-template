@@ -1,27 +1,28 @@
-# dash-app-structure
+# Dash-Template
 
- This repository is to demostrate some good practices for structuring a Dash app.
+Good practice Dash-Template
 
 ## Install and Setup
 
-For handling large apps, you'll want to make sure you are using a virtaul environment, so you can manage your packages properly.
-To create an environment, install requirements, and run the app, use the following:
+Create a virtual environment, install requirements and run the app:
 
 ```bash
-python -m venv .venv                            # create virtual environment
-.venv\Scripts\pip install -r requirements.txt   # install requirements
-.venv\Scripts\python src\app.py                 # run the application
+# On Windows
+python -m venv .venv
+.venv/Scripts/activate
+pip install -r requirements.txt
+python src\app.py
+
+# On Linux
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 src\app.py
 ```
 
 ## Structure
 
 This repository serves as a guide for structuring large Dash applications.
-The ideas presented in this guide come from my own experience working in large React projects and common attributes found in open source repositories.
-
-The following is an overview of the structure.
-I will follow the structure from top down, covering each item and its purpose.
-Additionally, I've created this repository to demonstrate the structure and serve as a template for anyone who wants to fork it.
-Each file in the repository includes more information about the purpose of the file.
 
 ```bash
 dash-template structure
@@ -43,19 +44,21 @@ dash-template structure
 |   |   |-- __init__.py
 |   |   |-- footer.py
 |   |   |-- navbar.py
-|   |   |-- component1.py
+|   |   |-- login.py
 |   |-- pages
 |   |   |-- __init__.py
 |   |   |-- complex_page
 |   |   |   |-- __init__.py
 |   |   |   |-- layout.py
-|   |   |   |-- page_specific_component.py
+|   |   |   |-- comp1.py
 |   |   |-- home.py
-|   |   |-- not_found_404.py
-|   |-- utils
-|   |   |-- __init__.py
-|   |   |-- common_functions.py
+|   |   |-- 404.py
+|   |   |-- login.py
+|   |   |-- logout.py
+|   |   |-- page2.py
 |   |-- app.py
+|   |-- gunicorn_config.py
+|   |-- settings.py
 ```
 
 ### Virtual Environment
