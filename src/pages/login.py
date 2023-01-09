@@ -12,5 +12,5 @@ layout = dbc.Row(
         lg=4,
         xxl=3,
     ),
-    justify='center'
+    justify="center",
 )

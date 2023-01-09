@@ -5,4 +5,4 @@ from src.pages.home import home_radios
 def test_home_radio_callback():
     value = 5
     output = home_radios(value)
-    assert output == f'You have selected {value}'
+    assert output == f"You have selected {value}"

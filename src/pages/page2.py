@@ -7,31 +7,29 @@ dash.register_page(__name__)
 
 logged_out_layout = html.Div(
     [
-        'Please login before viewing this page.',
+        "Please login before viewing this page.",
         html.Br(),
-        dbc.Button(
-            'Login',
-            href='/login'
-        )
+        dbc.Button("Login", href="/login"),
     ],
-    className='text-center'
+    className="text-center",
 )
 
 logged_in_layout = html.Div(
     [
-        html.H1('Page 2'),
+        html.H1("Page 2"),
         dcc.RadioItems(
-            id='page-2-radios',
-            options=[{'label': i, 'value': i} for i in ['Orange', 'Blue', 'Red']],
-            value='Orange',
+            id="page-2-radios",
+            options=[{"label": i, "value": i} for i in ["Orange", "Blue", "Red"]],
+            value="Orange",
         ),
-        html.Div(id='page-2-content'),
+        html.Div(id="page-2-content"),
         html.Br(),
-        dcc.Link('Go to Page 1', href='/page-1'),
+        dcc.Link("Go to Page 1", href="/page-1"),
         html.Br(),
-        dcc.Link('Go back to home', href='/'),
+        dcc.Link("Go back to home", href="/"),
     ]
 )
+
 
 def layout():
     if not current_user.is_authenticated:
@@ -39,6 +37,6 @@ def layout():
     return logged_in_layout
 
 
-@callback(Output('page-2-content', 'children'), Input('page-2-radios', 'value'))
+@callback(Output("page-2-content", "children"), Input("page-2-radios", "value"))
 def page_2_radios(value):
-    return f'You have selected {value}'
+    return f"You have selected {value}"

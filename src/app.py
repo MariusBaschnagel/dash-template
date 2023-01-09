@@ -1,7 +1,7 @@
-'''
+"""
 Main dash application file
 This is where we define the various css items to fetch as well as the layout of our application.
-'''
+"""
 
 import dash
 from dash import html
@@ -18,26 +18,24 @@ app = dash.Dash(
     __name__,
     server=server,
     use_pages=True,
-    external_stylesheets=[
-        dbc.themes.BOOTSTRAP,
-        dbc.icons.FONT_AWESOME
-    ],
+    external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME],
     meta_tags=[
-        {   # check if device is a mobile device
-            'name': 'viewport',
-            'content': 'width=device-width, initial-scale=1'
+        {  # check if device is a mobile device
+            "name": "viewport",
+            "content": "width=device-width, initial-scale=1",
         }
     ],
     suppress_callback_exceptions=True,
-    title='Dash app'
+    title="Dash app",
 )
 
-server.config.update(SECRET_KEY=os.getenv('SECRET_KEY'))
+server.config.update(SECRET_KEY=os.getenv("SECRET_KEY"))
 
 # Login manager object will be used to login / logout users
 login_manager = LoginManager()
 login_manager.init_app(server)
-login_manager.login_view = '/login'
+login_manager.login_view = "/login"
+
 
 @login_manager.user_loader
 def load_user(username):
@@ -47,29 +45,26 @@ def load_user(username):
     """
     return User(username)
 
+
 def serve_layout():
-    '''Define the layout of the application'''
+    """Define the layout of the application"""
     return html.Div(
         [
             login_location,
             navbar,
-            dbc.Container(
-                dash.page_container,
-                class_name='my-2'
-            ),
-            footer
+            dbc.Container(dash.page_container, class_name="my-2"),
+            footer,
         ]
     )
 
 
-app.layout = serve_layout   # set the layout to the serve_layout function
-server = app.server         # the server is needed to deploy the application
+app.layout = serve_layout  # set the layout to the serve_layout function
+server = app.server  # the server is needed to deploy the application
 
 if __name__ == "__main__":
     app.run_server(
         host=APP_HOST,
         port=APP_PORT,
         debug=APP_DEBUG,
-        dev_tools_props_check=DEV_TOOLS_PROPS_CHECK
+        dev_tools_props_check=DEV_TOOLS_PROPS_CHECK,
     )
-
