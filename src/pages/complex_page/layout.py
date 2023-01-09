@@ -16,9 +16,13 @@ dash.register_page(
     title='Complex page'
 )
 
-layout = html.Div(
-    [
-        html.H3('Random component'),
-        random_component
-    ]
-)
+def layout(lang="de", **other):
+    translate = {"en": {"greeting": "Hello"}, "de": {"greeting": "Hallo"}}
+    return html.Div(
+        [
+            html.H3(translate[lang]["greeting"]),
+            random_component
+        ]
+    )
+
+layout()
