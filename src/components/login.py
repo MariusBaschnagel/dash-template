@@ -2,13 +2,27 @@ from dash import html, dcc, callback, Output, Input, State
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from flask_login import UserMixin, current_user, logout_user, login_user
+from settings import LANGUAGES
 
 
 class User(UserMixin):
-    # User data model. It has to have at least self.id as a minimum
+    """User data model"""
+
     def __init__(self, username):
         self.id = username
         self.role = "member"
+        self.language = "en"
+
+    def change_language(self, val):
+        """Change default language for user"""
+        if val in LANGUAGES:
+            self.language = val
+            return True
+        return False
+
+    def change_role(self, val):
+        """Change current user role"""
+        pass
 
 
 login_card = dbc.Card(
@@ -57,6 +71,16 @@ logged_in_info = html.Div(
                 dbc.PopoverHeader("Settings"),
                 dbc.PopoverBody(
                     [
+                        html.Div(
+                            [
+                                html.P("Language", className="m-0"),
+                                dcc.Dropdown(
+                                    ["NYC", "MTL", "SF"], "NYC", id="demo-dropdown"
+                                ),
+                                html.Div(id="dd-output-container"),
+                            ]
+                        ),
+                        html.Br(),
                         dcc.Link(
                             [
                                 html.I(
@@ -65,12 +89,12 @@ logged_in_info = html.Div(
                                 "Logout",
                             ],
                             href="/logout",
-                        )
-                    ]
+                        ),
+                    ],
                 ),
             ],
             target="user-popover",
-            trigger="focus",
+            trigger="legacy",
             placement="bottom",
         ),
     ]
